@@ -6,7 +6,7 @@
 主要特點  
 ===
 * ✅ 指令壓縮傳遞：小模型生成 256 維向量指令，無需完整 Token 輸入，減少 KV Cache 負擔。  
-* ✅ 動態權重調整：大模型僅根據指令 更新 q_proj 的部分權重，而非全模型微調，內存消耗更低。  
+* ⚠ 動態權重調整：大模型僅根據指令 更新 q_proj 的部分權重，而非全模型微調，內存消耗更低。  
 * ✅ 支持 4-bit 量化：可搭配 bitsandbytes 進行 8-bit / 4-bit 量化，大幅降低權重佔用。
 * ✅ Flash Attention 加速：啟用 FlashAttention，減少 Attention 計算內存。
 * ✅ LoRA 適配：進一步減少內存需求，使 Mistral-7B 適合 12GB 內存運行。
