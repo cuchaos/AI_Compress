@@ -35,9 +35,25 @@
 
 硬體配置及環境
 ===
-- PyTorch version: 2.5.1
-- CUDA available: True
-- CUDA version: 12.1
-- Using device: cuda
-- GPU : NVIDIA GeForce RTX 4070 Ti SUPER
-- RAM : 32GB DDR5
+=== System Information ===
+- OS: Windows 10 (10.0.19045)
+- Machine: AMD64
+- CPU Cores (Total): 16
+- Total RAM: 31.10 GB
+- CUDA Available: True
+- CUDA Version: 12.4
+- Device Count: 1
+- Device 0: NVIDIA GeForce RTX 4070 Ti SUPER
+  - Compute Capability: (8, 9)
+  - Total Memory: 15.99 GB
+
+=== Software Environment ===
+- Python Version: 3.12.9
+- PyTorch Version: 2.6.0+cu124
+- Transformers Version: 4.49.0
+- Bitsandbytes: 0.45.3
+- Xformers: 0.0.29.post3
+- Peft: 0.14.0
+- Torchvision: 0.21.0+cu124
+- Torchaudio: 2.6.0+cu124
+- Nltk: 3.9.1
