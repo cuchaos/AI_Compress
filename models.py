@@ -22,22 +22,27 @@ def load_small_model(device="cuda"):
     print(f"Small model memory: {torch.cuda.memory_allocated(device) / 1024**3:.2f} GB")
     return small_model
 
+# models.py
 class InstructionDecoder(nn.Module):
     def __init__(self, input_dim=256, target_shape=(1024, 1024)):
         super().__init__()
         self.target_shape = target_shape
         output_dim = target_shape[0] * target_shape[1]
         self.net = nn.Sequential(
-            nn.Linear(input_dim, 256),  # FP32
+            nn.Linear(input_dim, 256),
             nn.ReLU(),
-            nn.Linear(256, output_dim),  # FP32
+            nn.Linear(256, output_dim),
         )
+    
     def forward(self, instruction):
-        weights = self.net(instruction)
-        return weights.view(*self.target_shape)
+        # instruction: (batch_size, input_dim)
+        weights = self.net(instruction)  # (batch_size, output_dim)
+        batch_size = instruction.size(0)
+        # 重塑為 (batch_size, target_shape[0], target_shape[1])
+        return weights.view(batch_size, *self.target_shape)
 
 def get_instruction(input_ids, small_model):
     outputs = small_model(input_ids)
-    cls_output = outputs.last_hidden_state[:, 0, :]
-    instruction = small_model.classifier(cls_output)
+    cls_output = outputs.last_hidden_state[:, 0, :]  # (batch_size, hidden_size)
+    instruction = small_model.classifier(cls_output)  # (batch_size, 256)
     return instruction
