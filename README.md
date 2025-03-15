@@ -7,15 +7,15 @@
 ===
 * ✅ 指令壓縮傳遞：小模型生成 256 維向量指令，無需完整 Token 輸入，減少 KV Cache 負擔。  
 * ✅ 動態權重調整：大模型僅根據指令 更新 q_proj 的部分權重，而非全模型微調，內存消耗更低。  
-* ❌ 支持 4-bit 量化：可搭配 bitsandbytes 進行 8-bit / 4-bit 量化，大幅降低權重佔用。 (todo)  
-* ❌ Flash Attention 加速：啟用 FlashAttention，減少 Attention 計算內存。 (todo)  
-* ❌ LoRA 適配：進一步減少內存需求，使 Mistral-7B 適合 12GB 內存運行。 (todo)
+* ✅ 支持 4-bit 量化：可搭配 bitsandbytes 進行 8-bit / 4-bit 量化，大幅降低權重佔用。
+* ✅ Flash Attention 加速：啟用 FlashAttention，減少 Attention 計算內存。
+* ✅ LoRA 適配：進一步減少內存需求，使 Mistral-7B 適合 12GB 內存運行。
 
 | 方法 | 內存消耗 |
 | :--: | :--: |
 | 標準 Mistral-7B（FP16）  | 18GB+ |
-| 本專案（未優化）(now)  | 14-15GB |
-| 本專案（4-bit 量化 + LoRA + Flash Attention）  | 10-12GB |  
+| 本專案（未優化）  | 14-15GB |
+| 本專案（4-bit 量化 + LoRA + Flash Attention）(now)  | 4-5GB |  
 
 ✨ 目標：可以在 RTX 4060 Ti（12GB）或更低 VRAM 的 GPU 上運行大模型！
 
@@ -27,11 +27,11 @@
 🔹 FlashAttention → 減少 Attention 機制的內存負擔  
 🔹 LoRA 適配 → 進一步減少計算需求  
 
-🔗 應用場景
+🔗 結果
  ===
-💡 低內存推理加速：讓大模型適用於 12GB 內存的 GPU（如 RTX 4060 Ti、A6000 16GB）  
-💡 邊緣 AI 設備適配：減少記憶體需求，適用於嵌入式 AI 設備  
-💡 高效大模型壓縮：類似 LoRA / Prompt Tuning，但更極端，完全拋棄 Token-based 語言輸入  
+💡 因為小模型的存在反而讓內存占用增加，只使用LoRA和量化的壓縮表現就已經很好。
+💡 小模型 (DistilBERT) 生成指令反而會增加記憶體的負擔。
+
 
 硬體配置及環境
 ===

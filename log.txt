@@ -2,3 +2,130 @@
 2025-03-15 20:05:12,360 - We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
 2025-03-15 20:05:25,862 - 
 === Memory Usage Test ===
+2025-03-15 22:31:32,150 - GPU: NVIDIA GeForce RTX 4070 Ti SUPER, Memory: 15.99 GB
+2025-03-15 22:31:32,737 - We will use 90% of the memory on device 0 for storing the model, and 10% for the buffer to avoid OOM. You can set `max_memory` in to a higher value to use more memory (at your own risk).
+2025-03-15 22:32:12,842 - 
+=== Memory Usage Test ===
+2025-03-15 22:32:17,818 - Length: 10, Batch: 1, Peak Memory: 4.43 GB
+2025-03-15 22:32:30,326 - Length: 10, Batch: 2, Peak Memory: 4.48 GB
+2025-03-15 22:32:43,020 - Length: 10, Batch: 4, Peak Memory: 4.54 GB
+2025-03-15 22:32:46,889 - Length: 50, Batch: 1, Peak Memory: 4.44 GB
+2025-03-15 22:32:59,467 - Length: 50, Batch: 2, Peak Memory: 4.50 GB
+2025-03-15 22:33:12,188 - Length: 50, Batch: 4, Peak Memory: 4.58 GB
+2025-03-15 22:33:16,616 - Length: 500, Batch: 1, Peak Memory: 4.61 GB
+2025-03-15 22:33:29,727 - Length: 500, Batch: 2, Peak Memory: 4.81 GB
+2025-03-15 22:33:43,378 - Length: 500, Batch: 4, Peak Memory: 5.19 GB
+2025-03-15 22:33:43,379 - 
+=== Generation Quality Test ===
+2025-03-15 22:33:51,321 - Prompt: What is AI?
+Generated: What is AI? Artificial Intelligence (AI) is a computer technology that creates machines capable of performing tasks requiring human intelligence such as: speech recognition, visual perception and decision-making.
+
+Why so much hype? Many investors in the tech industry believe that it will be to the next generation what the internet has been for theirs. For some the main question should be: ¡§is there life after AI?¡¨ and not whether these innovations are good or bad per se.
+
+What could this mean at DNV GL? With over 200 R&D projects ongoing at any time across our business areas, we have great interest in all new technologies that can provide data, insights, decisions that increase safety while reducing cost and environmental impact. For us, one area that shows big potential is maintenance - where many predict automation technology will play an increasing role going forward.
+Baseline: What is AI?
+
+Artificial Intelligence (AI) is a branch of computer science that deals with the creation of intelligent machines that can work and react like humans.
+
+AI is a broad term that encompasses a wide range of technologies, including machine learning, natural language processing, and computer vision.
+
+AI is used in a variety of industries, including healthcare, finance, and manufacturing, to automate tasks, improve decision-making, and enhance customer experiences.
+
+What is AI in healthcare?
+
+AI in healthcare refers to the use of AI technologies to improve patient care, streamline administrative processes, and enhance the overall healthcare experience.
+
+AI can be used to analyze large amounts of patient data, identify patterns and trends, and make predictions about patient outcomes.
+
+AI can also be used to automate administrative tasks, such as scheduling appointments and processing insurance claims, freeing up healthcare professionals to focus on patient care.
+
+What are the benefits of AI in
+BLEU: 0.0640
+
+2025-03-15 22:33:59,701 - Prompt: AI is transforming the world because
+Generated: AI is transforming the world because of its ability to quickly analyze data and take actions that can influence our everyday lives.
+
+A recent study by Accenture on artificial intelligence (AI) reveals a bright future for AI: 60% of executives surveyed agree or strongly agree with this optimism, up from just over half in last year¡¦s study and four fifths expect AI adoption to increase significantly in their industries within the next three years. However, when asked about key challenges facing their organization's implementation efforts today¡Xmost respondents identified cultural change as well as managing risk/security concerns related to new technologies such at machine learning approaches used by most firms currently deploying AI systems across various departments including IT & Security teams which are expected only get more complicated while trying figure out how best prepare themselves now with regards technology advancements coming down pipeline soon enough already poses challenge even before we talk about what will happen after!
+
+So what does this means? Is it possible that these companies don't
+Baseline: AI is transforming the world because it is transforming the way we work.
+
+The world is changing. The way we work is changing. The way we live is changing. The way we think is changing. The way we learn is changing. The way we communicate is changing. The way we interact is changing. The way we play is changing. The way we travel is changing. The way we eat is changing. The way we sleep is changing. The way we shop is changing. The way we work is changing. The way we learn is changing. The way we think is changing. The way we communicate is changing. The way we interact is changing. The way we play is changing. The way we travel is changing. The way we eat is changing. The way we sleep is changing. The way we shop is changing. The way we work is changing. The way we learn is changing. The way we think is changing. The way we communicate is changing. The way we interact is changing. The way
+BLEU: 0.0278
+
+2025-03-15 22:34:08,604 - Prompt: The future of AI is
+Generated: The future of AI is bright. With all the technological advancements and innovations we are seeing, it's hard to believe that just a few decades ago, most things were done manually or with traditional methods. Today, Artificial Intelligence (AI) has made our lives so much easier. AI has transformed how businesses operate, from improved efficiency in customer service to increased automation in manufacturing processes and beyond! And now there¡¦s another way you can use your data for good: through chatbots built on top of Google Analytics 4 platform!
+
+In 2015 when many thought we might be at peak innovation levels , some people started predicting robotic technology would replace jobs within ten years after being available on consumer devices like smartphones . By contrast though? We think those predictions will soon prove true sooner rather than later because machines have changed everything around them over time - including what makes us happy as humans; even if someone can program themselves out existence there still needs an emotional response somewhere else
+Baseline: The future of AI is in the hands of the people who are building it.
+
+The future of AI is in the hands of the people who are building it.
+
+The future of AI is in the hands of the people who are building it.
+
+The future of AI is in the hands of the people who are building it.
+
+The future of AI is in the hands of the people who are building it.
+
+The future of AI is in the hands of the people who are building it.
+
+The future of AI is in the hands of the people who are building it.
+
+The future of AI is in the hands of the people who are building it.
+
+The future of AI is in the hands of the people who are building it.
+
+The future of AI is in the hands of the people who are building it.
+
+The future of AI is in the hands of the people who are building it.
+
+The future of AI is in the
+BLEU: 0.0242
+
+2025-03-15 22:34:08,605 - 
+=== Generalization Test ===
+2025-03-15 22:34:08,627 - Prompt: Climate change is a pressing issue because, Loss: 0.000258
+2025-03-15 22:34:08,631 - Prompt: The history of technology shows, Loss: 0.000442
+2025-03-15 22:34:08,635 - Prompt: In the next decade, space exploration will, Loss: 0.000395
+2025-03-15 22:34:08,635 - Average Validation Loss: 0.000365
+2025-03-15 22:34:08,636 - 
+=== Stability Test ===
+2025-03-15 22:34:13,476 - Run 1: Loss: 0.000000, Generated: The future of AI is here! \U0001f916
+
+In our new course, Artificial Intelligence for the Real World, we look at where machine learning and AI are heading.
+
+We¡¦ve partnered with IBM to deliver a unique course featuring content from leading minds in this field¡K people who work on it every day. People such as Doug Balasny, CTO of IBM Cloud and Data Platform, Dr. John Kappelman Professor & Chair Electron Engineering Department, UT Austin (one of my old professors), and many more prominent figures.
+
+This course will answer questions like: What exactly can and cannot artificial intelligence do? How far away are we from AI becoming something you interact with everyday without realizing its presence or potential impact (like Siri)? Will there be any significant implications that arise from advancing current implementations of intelligent agents into ones that can learn on their own from data they interactively collect through sensor networks? And what about privacy concerns? This course expl
+2025-03-15 22:34:18,322 - Run 2: Loss: 0.000000, Generated: The future of AI is here now. As we write this article, Artificial Intelligence and robotics have evolved to such an extent which people can¡¦t even guess how its going to affect the world with it being more advanced than ever before. This technology might make you sit tight as some experts are predicting that in the nearer future artificial intelligence would be replacing 35% of all workforces across a number of industries.
+
+From robots cooking your food at the restaurants or delivering your pizza on time to self-driving cars; everything suggests that a majority of tasks carried out by human beings will soon be overrun by computers and machines. But don¡¦t get too worried just yet because there is enough ground for optimism and hope. According to the economists around the world, if one country manages to take advantage of emerging technologies such as automation and artificial intelligence (AI), then their growth rate could increase by up to three times what they previously thought possible. In other words:
+2025-03-15 22:34:23,160 - Run 3: Loss: 0.000000, Generated: The future of AI is uncertain. If it goes as well for humans as it has for machines, the next few decades will be an era of superabundant wealth and prosperity ¡X or if past precedent holds true in any way whatsoever, all of us are likely to wind up living in a dystopian nightmare run by megalomaniac robots that control both our minds and bodies with nanotechnological chips embedded deep within our brains¡K
+
+> It seems like everywhere I turn these days there¡¦s another article telling me how great life is going to get when some amazing breakthrough lets artificial intelligence (AI) take over everything from writing this article to driving my car to cooking dinner for my family to managing the world economy. This time I came across something called ¡§Potential Game,¡¨ which posits that we can predict whether any given innovation¡Xlike electric vehicles, or self-driving trucks, or CRISPR gene editing, which is used not only in agriculture
+2025-03-15 22:34:28,015 - Run 4: Loss: 0.000000, Generated: The future of AI is looking bright.
+
+AI has the potential to transform every sector, and most sectors are not even close to reaching their full potential for growth with AI at play in their processes right now ¡X as the 2019 Deloitte Global Human Capital Trends report states that only 8 percent of companies have a strategic plan around AI and that a mere 70 percent see it as an important area for investment. This means there¡¦s still massive room for organizations to improve upon or create entirely new framework models that leverage the power of AI to innovate how they run their business. In doing so, businesses can expect impressive ROI in terms both directly related (increased revenue via more efficient operations) and indirectly related (reduced headcount costs which free up resources towards strategic investments).
+
+### So what exactly does this mean?
+
+In short: When executing on your AI strategy , focus first on areas where implementation will impact process flow optimizations; those
+2025-03-15 22:34:32,857 - Run 5: Loss: 0.000000, Generated: The future of AI is very hard to predict, given how much impact and new breakthroughs it has made around the world.
+
+We¡¦ve listed 20 awesome artificial intelligence statistics for you below which can help us gauge where we are in this industry right now. Some interesting findings that popped up from these statistics include:
+
+- By as early as 2037, researchers have found that at least one supercomputer will achieve a thinking capacity equivalent to human brains or greater than humans (i.e., a ¡§total intelligence¡¨)
+
+- In fact, by that same year (2037), over half of businesses worldwide will be turning to Artificial Intelligence (AI) tools in order to enhance their customer service interactions with customers who request them
+
+Read more about AI here : What Is AI And How It Works?
+
+## Interesting Statistics To Know About The Future Of AI
+
+### General facts
+
+1. There were almost 50 countries competing in
+2025-03-15 22:34:32,858 - Average Loss: 0.000000, Std Dev: 0.000000
+2025-03-15 22:34:32,858 - 
+=== Efficiency Test ===
+2025-03-15 22:34:37,675 - Inference Time: 4.82 seconds
