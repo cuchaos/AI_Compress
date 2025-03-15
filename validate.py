@@ -7,12 +7,7 @@ from inference import infer
 from transformers import AutoTokenizer
 from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
 
-# 設置日誌
-logging.basicConfig(
-    filename='log.txt',
-    level=logging.INFO,
-    format='%(asctime)s - %(message)s'
-)
+logging.basicConfig(filename='log.txt', level=logging.INFO, format='%(asctime)s - %(message)s')
 
 def log(message):
     print(message)
@@ -22,11 +17,18 @@ def validate(small_model, decoder, large_model, val_input_ids, device):
     with torch.no_grad():
         with torch.amp.autocast('cuda', dtype=torch.float16):
             instruction = get_instruction(val_input_ids, small_model)
-            decoded_weights = decoder(instruction)
-            original_weights = large_model.model.layers[0].self_attn.q_proj.weight[:decoder.target_shape[0], :decoder.target_shape[1]]
-            loss = torch.nn.MSELoss(reduction='mean')(decoded_weights, original_weights.expand_as(decoded_weights))
+            decoded_weights = decoder(instruction).to(dtype=torch.float16)  # 形狀: [1, 4096, 16]
+            
+            q_proj = large_model._orig_mod.base_model.model.model.layers[0].self_attn.q_proj
+            if 'default' in q_proj.lora_B:
+                original_weights = q_proj.lora_B['default'].weight.to(device, dtype=torch.float16)
+            else:
+                raise ValueError("未找到預期的 LoRA 'default' 鍵")
+            
+            loss = torch.nn.MSELoss(reduction='mean')(decoded_weights, original_weights.unsqueeze(0))
     return loss.item()
 
+# 以下函數保持不變
 def test_memory_usage(small_model, decoder, large_model, tokenizer, device):
     input_lengths = [10, 50, 500]
     batch_sizes = [1, 2, 4]
@@ -102,8 +104,8 @@ def main():
 
     large_model = load_large_model(device)
     small_model = load_small_model(device)
-    target_shape = (1024, 1024)
-    decoder = InstructionDecoder(input_dim=256, target_shape=target_shape).to(device)
+    target_shape = (4096, 16)  # 更新為 LoRA B 的形狀
+    decoder = InstructionDecoder(input_dim=256, target_shape=target_shape, device=device)
 
     small_model.load_state_dict(torch.load("small_model.pt", map_location=device, weights_only=True))
     decoder.load_state_dict(torch.load("decoder.pt", map_location=device, weights_only=True))

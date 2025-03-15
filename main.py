@@ -3,6 +3,7 @@ import torch
 from models import load_large_model, load_small_model, InstructionDecoder, get_instruction
 from train import train
 from inference import infer
+from transformers import AutoTokenizer
 
 def main():
     device = torch.device("cuda")
@@ -15,16 +16,19 @@ def main():
 
     large_model = load_large_model(device)
     small_model = load_small_model(device)
-    target_shape = (1024, 1024)
-    decoder = InstructionDecoder(input_dim=256, target_shape=target_shape).to(device)
+    target_shape = (4096, 16)  # 更新為 LoRA B 的形狀
+    decoder = InstructionDecoder(input_dim=256, target_shape=target_shape, device=device)
     print(f"decoder.net[0].weight.device: {decoder.net[0].weight.device}")
     print(f"decoder.net[0].weight.dtype: {decoder.net[0].weight.dtype}")
 
-    input_ids = torch.randint(0, 1000, (1, 512)).to(device)
+    tokenizer = AutoTokenizer.from_pretrained("mistralai/Mistral-7B-v0.1")
+    input_text = "The future of AI is"
+    inputs = tokenizer(input_text, return_tensors="pt")
+    input_ids = inputs.input_ids.to(device)
 
     small_model, decoder = train(small_model, decoder, large_model, input_ids, epochs=10, device=device)
     output = infer(small_model, decoder, large_model, input_ids, device=device)
-    print("Generated output:", output)
+    print("Generated output:", tokenizer.decode(output[0], skip_special_tokens=True))
 
     torch.save(small_model.state_dict(), "small_model.pt")
     torch.save(decoder.state_dict(), "decoder.pt")

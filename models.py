@@ -3,29 +3,33 @@ import torch
 import torch.nn as nn
 from transformers import AutoModelForCausalLM, AutoModel
 from peft import LoraConfig, get_peft_model
+from transformers import BitsAndBytesConfig
 
 def load_large_model(device):
     print(f"Loading large model on {device}")
+    quantization_config = BitsAndBytesConfig(
+        load_in_4bit=True,
+        bnb_4bit_compute_dtype=torch.float16,
+        bnb_4bit_quant_type="nf4",
+        bnb_4bit_use_double_quant=True
+    )
     model = AutoModelForCausalLM.from_pretrained(
         "mistralai/Mistral-7B-v0.1",
-        load_in_4bit=True,  # 4-bit 量化
+        quantization_config=quantization_config,
         device_map="auto",
         torch_dtype=torch.float16
     )
-    # 應用 LoRA
     lora_config = LoraConfig(
-        r=16,  # 秩
+        r=16,
         lora_alpha=32,
-        target_modules=["q_proj", "v_proj"],  # 目標注意力層
+        target_modules=["q_proj", "v_proj"],
         lora_dropout=0.05,
         bias="none",
         task_type="CAUSAL_LM"
     )
     model = get_peft_model(model, lora_config)
-    # 啟用 FlashAttention（若硬體支援）
-    if torch.cuda.is_available() and torch.cuda.get_device_capability()[0] >= 8:
+    if torch.cuda.get_device_capability()[0] >= 8:
         model.config.use_flash_attention_2 = True
-    # 編譯模型
     if hasattr(torch, "compile"):
         model = torch.compile(model)
     memory = torch.cuda.memory_allocated(device) / 1024**3
@@ -41,7 +45,7 @@ def load_small_model(device):
     return model
 
 class InstructionDecoder(nn.Module):
-    def __init__(self, input_dim=256, target_shape=(1024, 1024)):
+    def __init__(self, input_dim=256, target_shape=(4096, 16), device="cuda"):  # 確認為 LoRA B 的形狀
         super().__init__()
         self.target_shape = target_shape
         output_dim = target_shape[0] * target_shape[1]
@@ -49,7 +53,7 @@ class InstructionDecoder(nn.Module):
             nn.Linear(input_dim, 256),
             nn.ReLU(),
             nn.Linear(256, output_dim),
-        )
+        ).to(device)
     
     def forward(self, instruction):
         weights = self.net(instruction)

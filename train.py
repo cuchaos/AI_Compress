@@ -1,3 +1,4 @@
+# train.py
 import torch
 from torch.optim import Adam
 from torch.nn import MSELoss
@@ -11,26 +12,30 @@ def train(small_model, decoder, large_model, input_ids, epochs=10, device="cuda"
     optimizer = Adam(list(small_model.parameters()) + list(decoder.parameters()), lr=1e-5)
     criterion = MSELoss()
 
-    original_weights = large_model.model.layers[0].self_attn.q_proj.weight.to(device)
-    target_shape = decoder.target_shape
-    original_weights = original_weights[:target_shape[0], :target_shape[1]]  # FP16
+    # 獲取 q_proj 層的 LoRA B 權重
+    q_proj = large_model._orig_mod.base_model.model.model.layers[0].self_attn.q_proj
+    if 'default' in q_proj.lora_B:
+        original_weights = q_proj.lora_B['default'].weight.to(device, dtype=torch.float16)
+    else:
+        raise ValueError("未找到預期的 LoRA 'default' 鍵")
 
     scaler = GradScaler('cuda')
 
     for epoch in range(epochs):
         optimizer.zero_grad()
         
-        # 使用 autocast 進行 FP16 計算
         with autocast('cuda', dtype=torch.float16):
             instruction = get_instruction(input_ids, small_model)
-            decoded_weights = decoder(instruction)
-            loss = criterion(decoded_weights, original_weights)
+            decoded_weights = decoder(instruction)  # 形狀: [1, 4096, 16]
+            decoded_weights = decoded_weights.to(dtype=torch.float16)
+            # print(f"decoded_weights shape: {decoded_weights.shape}")  # 診斷輸出
+            # print(f"original_weights shape: {original_weights.shape}")  # 診斷輸出
+            loss = criterion(decoded_weights, original_weights.unsqueeze(0))
 
         if torch.isnan(loss) or torch.isinf(loss):
             print(f"Epoch {epoch}: Loss is NaN or Inf! Stopping training.")
             return small_model, decoder
 
-        # 反向傳播，梯度保持 FP32
         scaler.scale(loss).backward()
         scaler.step(optimizer)
         scaler.update()
